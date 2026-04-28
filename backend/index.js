@@ -1,6 +1,10 @@
+const https = require("https");
+const fs = require("fs");
 const express = require("express")
 const cors = require("cors")
 const app = express()
+
+app.use(express.json());
 
 const allowedOrigins = [
     'http://localhost:3000'
@@ -21,10 +25,21 @@ const corsOptions = {
 };
 app.use(cors(corsOptions))
 
-app.get('/api/signup', (req, res) => {
-    res.json({ message: 'Hello' })
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+  console.log(email, password);
+  res.json({ message: 'Hello' })
 })
 
+// for secure server
+// const options = {
+//   key: fs.readFileSync('./localhost+3-key.pem'),
+//   cert: fs.readFileSync('./localhost+3.pem')
+// };
+// https.createServer(options, app).listen(8000, '0.0.0.0', () => {
+//   console.log('🔒 Secure Server running on https://192.168.1.35:8000');
+// });
+
 app.listen(8000, () => {
-    console.log("Started the backend at port 8000")
-})
+  console.log('running on port 8000');
+});

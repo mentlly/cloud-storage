@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { validateEmail } from './actions';
+import { validateForm } from './actions';
 
 
 interface FormData {
@@ -43,7 +43,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await validateEmail(formData, errors);
+    const response = await validateForm(formData, errors);
     if (!response.success) {
         setErrors(response); // Update the local UI state with server-side errors
         setIsLoading(false);

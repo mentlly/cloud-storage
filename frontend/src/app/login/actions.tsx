@@ -11,7 +11,7 @@ interface FormErrors {
   submit?: string;
 }
 
-export async function validateEmail(formData: FormData, formErrors: FormErrors) {
+export async function validateForm(formData: FormData, formErrors: FormErrors) {
     const newErrors: FormErrors = {};
     if (!formData.email) {
       newErrors.email = 'Email is required';
@@ -24,6 +24,11 @@ export async function validateEmail(formData: FormData, formErrors: FormErrors) 
     } else if (formData.password.length < 8) {
       newErrors.password = 'Password must be at least 6 characters';
     }
+    const response = await fetch('http://192.168.1.35:8000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    });
 
     if (Object.keys(newErrors).length > 0) {
       return { ...newErrors, success: false };
