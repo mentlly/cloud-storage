@@ -29,9 +29,5 @@ export async function validateForm(formData: FormData, formErrors: FormErrors) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
     });
-
-    if (Object.keys(newErrors).length > 0) {
-      return { ...newErrors, success: false };
-    }
-    return { success: true };
+    return response.status;
 }

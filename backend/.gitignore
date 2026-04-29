@@ -1,3 +1,5 @@
 /node_modules
 .env*
-localhost*
+*.pem
+db_data
+*.db
