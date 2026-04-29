@@ -1,5 +1,3 @@
-// database.js
-const bcrypt = require('bcrypt');
 const { Pool, Client } = require('pg');
 
 async function ensureDatabaseExists() {
@@ -53,26 +51,26 @@ const initDb = async () => {
 };
 initDb();
 
-async function seedUser() {
-  const email = 'sam@mbcet.ac.in';
-  const plainPassword = 'password123';
-  const saltRounds = 10;
+// async function seedUser() {
+//   const email = 'sam@mbcet.ac.in';
+//   const plainPassword = 'password123';
+//   const saltRounds = 10;
 
-  try {
-    // 1. Create a real hash
-    const hash = await bcrypt.hash(plainPassword, saltRounds);
+//   try {
+//     // 1. Create a real hash
+//     const hash = await bcrypt.hash(plainPassword, saltRounds);
 
-    // 2. Insert into the database
-    const queryText = 'INSERT INTO users(email, password_hash) VALUES($1, $2) RETURNING *';
-    const res = await pool.query(queryText, [email, hash]);
+//     // 2. Insert into the database
+//     const queryText = 'INSERT INTO users(email, password_hash) VALUES($1, $2) RETURNING *';
+//     const res = await pool.query(queryText, [email, hash]);
 
-    console.log("✅ User created successfully:", res.rows[0].email);
-    console.log("🔑 You can now log in with password: password123");
-  } catch (err) {
-    console.error("❌ Error seeding user:", err.stack);
-  }
-}
-seedUser();
+//     console.log("User created successfully:", res.rows[0].email);
+//     console.log("You can now log in with password: password123");
+//   } catch (err) {
+//     console.error("Error seeding user:", err.stack);
+//   }
+// }
+// seedUser();
 
 // Export the query function so index.js can use it
 module.exports = {
