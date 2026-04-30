@@ -44,15 +44,14 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     const response = await validateForm(formData, errors);
-    console.log(response);
-    // if (!response.success) {
-    //     setErrors(response);
-    //     setIsLoading(false);
-    //     return;
-    // } else {
-    //     router.push("/");
-    // }
-    // setErrors({});
+    if (response.status != 200) {
+        setErrors(response.error);
+        setIsLoading(false);
+        return;
+    } else {
+        router.push("/");
+    }
+    setErrors({});
   };
 
   return (

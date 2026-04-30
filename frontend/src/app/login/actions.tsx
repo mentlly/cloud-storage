@@ -22,12 +22,16 @@ export async function validateForm(formData: FormData, formErrors: FormErrors) {
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'Password must be at least 8 characters';
     }
     const response = await fetch('http://192.168.1.35:8000/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
     });
-    return response.status;
+    const data = await response.json();
+    if (data.message === "Invalid email or password") {
+        newErrors.submit = data.message;
+    }
+    return {status: response.status, message: data.message, error: newErrors};
 }
