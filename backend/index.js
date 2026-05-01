@@ -3,7 +3,8 @@ const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const db = require("./modules/database");
-const login = require("./modules/login")
+const login = require("./modules/login");
+const signup = require("./modules/signup");
 const bcrypt = require('bcrypt');
 const app = express()
 
@@ -31,6 +32,12 @@ app.use(cors(corsOptions))
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   const result = await login.login(email, password);
+  return res.status(result.status).json({message: result.message});
+});
+
+app.post('/api/signup', async (req, res) => {
+  const { email, password } = req.body;
+  const result = await signup.signup(email, password);
   return res.status(result.status).json({message: result.message});
 });
 

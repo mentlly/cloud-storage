@@ -16,7 +16,7 @@ interface FormErrors {
   submit?: string;
 }
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: '',
@@ -58,8 +58,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-          <p className="text-gray-600">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome</h1>
+          <p className="text-gray-600">Sign up to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -125,15 +125,15 @@ export default function LoginPage() {
             disabled={isLoading}
             className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2 rounded-lg transition duration-200"
           >
-            {isLoading ? 'Signing in...' : 'Sign in'}
+            {isLoading ? 'Signing up...' : 'Sign up'}
           </button>
         </form>
 
-        {/* Sign Up Link */}
+        {/* Sign In Link */}
         <p className="mt-6 text-center text-gray-600">
-          Don't have an account?{' '}
-          <a href="/signup" className="text-indigo-600 hover:text-indigo-700 font-medium">
-            Sign up
+          Do have an account?{' '}
+          <a href="/login" className="text-indigo-600 hover:text-indigo-700 font-medium">
+            Sign in
           </a>
         </p>
       </div>
